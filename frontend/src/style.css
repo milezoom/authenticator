@@ -1,0 +1,76 @@
+html {
+  background-color: rgba(27, 38, 54, 1);
+  color: #FFFFFF;
+}
+
+body {
+  margin: 0;
+  color: #FFFFFF;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""),
+    url("assets/fonts/nunito-v16-latin-regular.woff2") format("woff2");
+}
+
+#app {
+  height: 100vh;
+}
+
+.title {
+  height: 50px;
+  border-bottom: 3px solid #FFFFFF;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title-left {
+  padding-left: 20px;
+  font-size: 1.25em;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.title-right {
+  padding-right: 15px;
+  text-align: right;
+  flex-grow: 1;
+}
+
+.btn-nav {
+  padding: 5px 15px;
+  background: none;
+  color: #FFFFFF;
+}
+
+.btn-green {
+  border: 2px solid #2ECC71;
+}
+
+.btn-green:hover {
+  background-color: #2ECC71;
+}
+
+.btn-green:active {
+  background-color: #25A25A;
+}
+
+.btn-red {
+  border: 2px solid #F76E64;
+}
+
+.btn-red:hover {
+  background-color: #F76E64;
+}
+
+.btn-red:active {
+  background-color: #F44336;
+}

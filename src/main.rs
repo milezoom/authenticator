@@ -1,6 +1,6 @@
 #![windows_subsystem = "windows"]
 
-use iced::pure::widget::{Button, Column, Container, Text};
+use iced::pure::widget::{Button, Column, Container, Row, Text};
 use iced::pure::Sandbox;
 use iced::{window, Settings};
 
@@ -29,13 +29,17 @@ impl Sandbox for Counter {
         }
     }
     fn view(&self) -> iced::pure::Element<'_, Self::Message> {
+        let app_name = Text::new("Authenticator");
+        let btn_add = Button::new("Hello");
+        let header = Row::new().push(app_name).push(btn_add);
+
         let label = Text::new(format!("Count: {}", self.count));
         let incr = Button::new("Increment").on_press(CounterMessage::Increment);
         let decr = Button::new("Decrement").on_press(CounterMessage::Decrement);
-        let col = Column::new().push(incr).push(label).push(decr);
+        let col = Column::new().push(header).push(incr).push(label).push(decr);
         Container::new(col)
-            .center_x()
-            .center_y()
+            .align_x(iced::alignment::Horizontal::Center)
+            .align_y(iced::alignment::Vertical::Top)
             .width(iced::Length::Fill)
             .height(iced::Length::Fill)
             .into()

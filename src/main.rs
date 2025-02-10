@@ -16,6 +16,8 @@ use eframe::NativeOptions;
 use serde::Deserialize;
 use serde::Serialize;
 use std::fs;
+use std::fs::File;
+use std::path::Path;
 use std::time::Duration;
 use totp_rs::Algorithm;
 use totp_rs::Secret;
@@ -30,16 +32,8 @@ struct Account {
 }
 
 fn gen_totp(acc: &Account) -> String {
-    let totp = TOTP::new(
-        Algorithm::SHA1,
-        6,
-        1,
-        30,
-        Secret::Raw(acc.secret.as_bytes().to_vec())
-            .to_bytes()
-            .unwrap(),
-    )
-    .unwrap();
+    let secret = Secret::Encoded(acc.secret.to_string());
+    let totp = TOTP::new_unchecked(Algorithm::SHA1, 6, 1, 30, secret.to_bytes().unwrap());
     totp.generate_current().unwrap()
 }
 
@@ -163,13 +157,22 @@ fn show_page_edit(app: &mut AuthenticatorApp, ctx: &Context) {
 }
 
 fn read_file_account() -> Vec<Account> {
+    check_and_create_file();
     let contents = fs::read_to_string("accounts.json").expect("error reading account file:");
-    serde_json::from_str(&contents).unwrap()
+    serde_json::from_str(&contents).unwrap_or_default()
 }
 
 fn write_file_account(accounts: Vec<Account>) {
     let data = serde_json::to_string(&accounts).unwrap();
+    check_and_create_file();
     fs::write("accounts.json", data).expect("error writing accounts file:");
+}
+
+fn check_and_create_file() {
+    let is_exists = Path::new("accounts.json").exists();
+    if is_exists == false {
+        let _ = File::create("accounts.json");
+    }
 }
 
 fn update_accounts(app: &mut AuthenticatorApp) {

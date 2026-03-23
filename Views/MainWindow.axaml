@@ -10,6 +10,7 @@
     Height="600"
     Padding="4"
     x:DataType="vm:MainWindowViewModel"
+    CanResize="false"
     Icon="/Assets/Authenticator.ico"
     mc:Ignorable="d">
 

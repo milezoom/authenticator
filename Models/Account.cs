@@ -1,4 +1,4 @@
-namespace AuthAvalonia.Models;
+namespace Authenticator.Models;
 
 public class Account
 {

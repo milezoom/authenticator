@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace AuthAvalonia;
+namespace Authenticator;
 
 sealed class Program
 {

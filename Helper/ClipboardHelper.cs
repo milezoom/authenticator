@@ -4,7 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using System;
 using System.Threading.Tasks;
 
-namespace AuthAvalonia.Helper;
+namespace Authenticator.Helper;
 
 public static class ClipboardHelper
 {

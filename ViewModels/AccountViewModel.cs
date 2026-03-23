@@ -1,9 +1,9 @@
 using System;
-using AuthAvalonia.Models;
+using Authenticator.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using OtpNet;
 
-namespace AuthAvalonia.ViewModels;
+namespace Authenticator.ViewModels;
 
 public partial class AccountViewModel : ViewModelBase
 {

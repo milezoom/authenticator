@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AuthAvalonia.Models;
+using Authenticator.Models;
 
-namespace AuthAvalonia.Services;
+namespace Authenticator.Services;
 
 public static class AccountFileService
 {
     private static readonly string _jsonFileName = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "Avalonia.AuthAvalonia", "AccountList.json"
+        "Avalonia.Authenticator", "AccountList.json"
     );
 
     public static async Task SaveToFileAsync(IEnumerable<Account> itemsToSave)

@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace AuthAvalonia.ViewModels;
+namespace Authenticator.ViewModels;
 
 public abstract class ViewModelBase : ObservableObject
 {

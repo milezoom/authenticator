@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using AuthAvalonia.Helper;
+using Authenticator.Helper;
 
-namespace AuthAvalonia.ViewModels;
+namespace Authenticator.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {

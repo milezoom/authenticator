@@ -1,16 +1,16 @@
 <Window
-    x:Class="AuthAvalonia.Views.MainWindow"
+    x:Class="Authenticator.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:AuthAvalonia.ViewModels"
-    Title="AuthAvalonia"
+    xmlns:vm="using:Authenticator.ViewModels"
+    Title="Authenticator"
     Width="400"
     Height="600"
     Padding="4"
     x:DataType="vm:MainWindowViewModel"
-    Icon="/Assets/avalonia-logo.ico"
+    Icon="/Assets/Authenticator.ico"
     mc:Ignorable="d">
 
     <Design.DataContext>

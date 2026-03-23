@@ -3,14 +3,14 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
-using AuthAvalonia.ViewModels;
-using AuthAvalonia.Views;
-using AuthAvalonia.Services;
+using Authenticator.ViewModels;
+using Authenticator.Views;
+using Authenticator.Services;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Threading;
 
-namespace AuthAvalonia;
+namespace Authenticator;
 
 public partial class App : Application
 {

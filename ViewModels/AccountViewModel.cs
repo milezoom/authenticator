@@ -1,12 +1,16 @@
 using System;
 using Authenticator.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.VisualBasic;
 using OtpNet;
 
 namespace Authenticator.ViewModels;
 
 public partial class AccountViewModel : ViewModelBase
 {
+    [ObservableProperty]
+    private string? _id;
+
     [ObservableProperty]
     private string? _accountName;
 
@@ -26,6 +30,11 @@ public partial class AccountViewModel : ViewModelBase
 
     public AccountViewModel(Account account)
     {
+        Id = account.Id;
+        if (string.IsNullOrWhiteSpace(Id))
+        {
+            Id = Guid.CreateVersion7().ToString();
+        }
         AccountName = account.AccountName;
         Username = account.Username;
         Secret = account.Secret;
@@ -35,6 +44,7 @@ public partial class AccountViewModel : ViewModelBase
     {
         var account = new Account()
         {
+            Id = this.Id,
             AccountName = this.AccountName,
             Username = this.Username,
             Secret = this.Secret,

@@ -2,7 +2,7 @@ APPIMAGE_TOOL_URL = "https://github.com/AppImage/appimagetool/releases/download/
 
 .PHONY: debug release appimage
 
-debug:
+run:
 	dotnet run
 
 release:

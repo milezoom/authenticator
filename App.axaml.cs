@@ -9,6 +9,7 @@ using Authenticator.Services;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Threading;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Authenticator;
 
@@ -26,6 +27,7 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             DisableAvaloniaDataAnnotationValidation();
+
             desktop.MainWindow = new MainWindow
             {
                 DataContext = _mainWindowViewModel,
@@ -39,11 +41,10 @@ public partial class App : Application
         RunAccountCodeWorker();
     }
 
-    private void DisableAvaloniaDataAnnotationValidation()
+    private static void DisableAvaloniaDataAnnotationValidation()
     {
         // Get an array of plugins to remove
-        var dataValidationPluginsToRemove =
-            BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
+        var dataValidationPluginsToRemove = BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
 
         // remove each entry found
         foreach (var plugin in dataValidationPluginsToRemove)
@@ -59,11 +60,8 @@ public partial class App : Application
 
         if (!_canClose)
         {
-            // var itemsToSave = _mainWindowViewModel.ToDoItems.Select(item => item.GetToDoItem());
-            // await ToDoListFileService.SaveToFileAsync(itemsToSave);
-
             var accountsToSave = _mainWindowViewModel.Accounts.Select(item => item.GetAccount());
-            await AccountFileService.SaveToFileAsync(accountsToSave);
+            await AccountFileService.StoreToDBAsync(accountsToSave);
 
             _canClose = true;
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -75,16 +73,7 @@ public partial class App : Application
 
     private async Task InitMainViewModelAsync()
     {
-        // var itemsLoaded = await ToDoListFileService.LoadItemFromFileAsync();
-        // if (itemsLoaded is not null)
-        // {
-        //     foreach (var item in itemsLoaded)
-        //     {
-        //         _mainWindowViewModel.ToDoItems.Add(new ToDoItemViewModel(item));
-        //     }
-        // }
-
-        var accountsLoaded = await AccountFileService.LoadItemFromFileAsync();
+        var accountsLoaded = await AccountFileService.LoadFromDBAsync();
         if (accountsLoaded is not null)
         {
             foreach (var item in accountsLoaded)

@@ -1,33 +1,28 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Authenticator.ViewModels;
+using Authenticator.Views;
 
 namespace Authenticator;
 
-/// <summary>
-/// Given a view model, returns the corresponding view if possible.
-/// </summary>
-[RequiresUnreferencedCode(
-    "Default implementation of ViewLocator involves reflection which may be trimmed away.",
-    Url = "https://docs.avaloniaui.net/docs/concepts/view-locator")]
 public class ViewLocator : IDataTemplate
 {
+    private static readonly Dictionary<Type, Func<Control>> ViewFactories = new()
+    {
+        [typeof(MainWindowViewModel)] = () => new MainWindow(),
+    };
+
     public Control? Build(object? param)
     {
         if (param is null)
             return null;
 
-        var name = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-        var type = Type.GetType(name);
+        if (ViewFactories.TryGetValue(param.GetType(), out var factory))
+            return factory();
 
-        if (type != null)
-        {
-            return (Control)Activator.CreateInstance(type)!;
-        }
-
-        return new TextBlock { Text = "Not Found: " + name };
+        return new TextBlock { Text = "Not Found: " + param.GetType().Name };
     }
 
     public bool Match(object? data)

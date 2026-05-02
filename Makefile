@@ -5,13 +5,16 @@ APPIMAGE_TOOL_URL = "https://github.com/AppImage/appimagetool/releases/download/
 run:
 	dotnet run
 
-release:
-	dotnet publish -c Release
+release-linux-x64:
+	dotnet publish -r linux-x64 -c Release
 
-clean:
+release-osx-arm64:
+	dotnet publish -r osx-arm64 -c Release
+
+clean-appimage:
 	rm -rf AppImage
 
-appimage: clean release
+release-appimage: clean-appimage release-linux-x64
 	mkdir -p AppImage/Authenticator.AppDir/usr/bin/
 	mkdir -p AppImage/Authenticator.AppDir/usr/share/icons/
 ifeq (,$(wildcard appimagetool))

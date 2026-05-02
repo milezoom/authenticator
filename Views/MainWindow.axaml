@@ -82,17 +82,17 @@
         <TextBox
             Grid.Row="2"
             Text="{Binding NewAccountName}"
-            Watermark="Set account name" />
+            PlaceholderText="Set account name" />
 
         <TextBox
             Grid.Row="3"
             Text="{Binding NewUsername}"
-            Watermark="Set account username" />
+            PlaceholderText="Set account username" />
 
         <TextBox
             Grid.Row="4"
             Text="{Binding NewSecret}"
-            Watermark="Set account secret" />
+            PlaceholderText="Set account secret" />
 
         <Button Grid.Row="5" Command="{Binding AddAccountCommand}">Store Account</Button>
     </Grid>
